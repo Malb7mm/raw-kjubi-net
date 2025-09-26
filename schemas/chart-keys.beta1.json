@@ -102,6 +102,13 @@
             "events": {
               "items": {
                 "type": "object",
+                "required": ["tag"],
+                "properties": {
+                  "tag": {
+                    "description": "イベントタグ。このイベントをオブジェクトに適用させる際には、同じタグ名をeventTagsプロパティのリスト内に含めなければなりません"
+                  }
+                },
+
                 "oneOf": [
                   {
                     "required": ["type", "timing", "from"],
