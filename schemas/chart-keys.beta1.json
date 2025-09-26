@@ -8,6 +8,7 @@
     {
       "$ref": "https://raw.kjubi.net/schemas/chart.beta1.json"
     },
+    
     {
       "properties": {
         "extendedVersion": {
