@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.kjubi.net/schemas/chartmeta.beta1.json",
+  "title": "Chart Metadata",
+  "description": "Metadata of Kjubi chart",
+  "type": "object",
+  "required": ["sid"],
+
+  "properties": {
+    "sid": {
+      "description": "楽曲ID",
+      "type": "string"
+    },
+
+    "title": {
+      "description": "譜面タイトル",
+      "type": "string"
+    },
+
+    "author": {
+      "description": "譜面の作成者名義",
+      "type": "string"
+    },
+
+    "difficultyNumber": {
+      "description": "譜面の難易度値",
+      "type": "number"
+    }
+  }
+}

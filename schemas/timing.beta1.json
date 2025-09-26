@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.kjubi.net/schemas/timing.beta1.json",
+  "title": "Timing",
+  "description": "Timing representer for Kjubi chart data",
+  "type": "object",
+  "required": ["bar", "beat", "divisor"],
+
+  "properties": {
+    "bar": {
+      "description": "タイミングの位置する小節",
+      "type": "integer"
+    },
+
+    "beat": {
+      "description": "タイミングの小節内での位置（分子）",
+      "type": "number"
+    },
+
+    "divisor": {
+      "description": "タイミングの小節内での位置（分母）",
+      "type": "number"
+    },
+
+    "tempolist": {
+      "description": "タイミングの解釈に使用するテンポリスト。省略した場合はdefaultテンポリストで解釈されます",
+      "type": "string"
+    }
+  }
+}

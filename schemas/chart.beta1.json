@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.kjubi.net/schemas/chart.beta1.json",
+  "title": "Chart",
+  "description": "A chart file for kjubi-engine",
+  "type": "object",
+  "required": ["schemaVersion", "meta", "content"],
+
+  "properties": {
+    "schemaVersion": {
+      "const": "chart@beta1"
+    },
+
+    "extendedVersion": {
+      "type": "string"
+    },
+
+    "meta": {
+      "$ref": "https://raw.kjubi.net/schemas/chartmeta.beta1.json"
+    },
+
+    "content": {
+      "type": "object",
+      "required": ["objects", "tempolists"],
+
+      "properties": {
+        "variants": {
+          "description": "オブジェクトのバリアント定義のリスト。スキンによっては、オブジェクトに追加の情報を持たせることで、各オブジェクトの見た目のカスタマイズ等が可能な場合があります。ここでは、バリアントの名前付きプリセットを定義します",
+          "type": "array",
+
+          "items": {
+            "type": "object"
+          }
+        },
+
+        "objects": {
+          "description": "オブジェクトのリスト。譜面上のオブジェクト（ノーツなど）を全て列挙します",
+          "type": "array",
+
+          "items": {
+            "type": "object"
+          }
+        },
+
+        "events": {
+          "description": "イベントのリスト。特定のタイミングで発生するイベント（BPM変化など）を全て列挙します",
+          "type": "array",
+
+          "items": {
+            "type": "object"
+          }
+        },
+
+        "tempolists": {
+          "description": "テンポリスト（のリスト）。楽曲のBPM・拍子変化イベントを列挙します。デフォルトで使用されるテンポリストdefaultの他に、任意のキー名でテンポリストを追加できます",
+          "type": "object",
+          "required": ["default"],
+
+          "properties": {
+            "default": {
+              "$ref": "#/defs/tempolist"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/defs/tempolist"
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "tempolist": {
+      "type": "array",
+
+      "items": {
+        "type": "object",
+        "required": ["bar", "tempo", "beat", "divisor"],
+
+        "properties": {
+          "bar": {
+            "description": "小節番号。テンポリストの要素はbarの値によってソートされ、barに指定した小節以降でテンポおよび拍子が適用されます",
+            "type": "integer"
+          },
+
+          "tempo": {
+            "description": "テンポ（BPM）",
+            "type": "number"
+          },
+        
+          "beat": {
+            "description": "拍子の分子部分の値",
+            "type": "number"
+          },
+        
+          "divisor": {
+            "description": "拍子の分母部分の値",
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
