@@ -29,7 +29,7 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "eventtags": {
+                  "eventTags": {
                     "description": "オブジェクトに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
                     "type": "array",
                     "items": { "type": "string" }
