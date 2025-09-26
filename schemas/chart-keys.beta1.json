@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/refs/heads/feat/beta1/schemas/chart-keys.beta1.json",
+  "$id": "https://raw.kjubi.net/schemas/chart-keys.beta1.json",
   "title": "Chart (Keys)",
   "description": "A chart file of Keys mode for kjubi-engine",
 
