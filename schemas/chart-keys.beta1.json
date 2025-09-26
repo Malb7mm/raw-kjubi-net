@@ -8,7 +8,7 @@
     {
       "$ref": "https://raw.kjubi.net/schemas/chart.beta1.json"
     },
-    
+
     {
       "properties": {
         "extendedVersion": {
@@ -27,6 +27,7 @@
               "type": "object",
               "oneOf": [
                 {
+                  "required": ["type", "timing", "lane"],
                   "properties": {
                     "type": {
                       "description": "オブジェクトの種類 [single: 単音のノーツを表します]",
@@ -53,6 +54,7 @@
                 },
 
                 {
+                  "required": ["type", "timing", "endTiming", "lane"],
                   "properties": {
                     "type": {
                       "description": "オブジェクトの種類 [long: ロング（長押し）ノーツを表します]",
@@ -88,6 +90,7 @@
                 },
 
                 {
+                  "required": ["type"],
                   "properties": {
                     "type": {
                       "description": "オブジェクトの種類 [barline: 小節線を表します]",
