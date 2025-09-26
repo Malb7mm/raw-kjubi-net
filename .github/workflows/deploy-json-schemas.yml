@@ -28,16 +28,16 @@ jobs:
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "Updating $id for main branch..."
             for file in schemas/*.json; do
-              sed -i -E 's|"\$id": "https?://[^/]+/schemas/([^"]+)"|"$id": "https://raw.kjubi.net/schemas/\1"|g' "$file"
-              sed -i -E 's|"\$ref": "https?://[^/]+/schemas/([^"]+)"|"$ref": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$id": "https?://.+/schemas/([^"]+)"|"$id": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https?://.+/schemas/([^"]+)"|"$ref": "https://raw.kjubi.net/schemas/\1"|g' "$file"
             done
           # mainブランチ以外の場合の処理
           else
             echo "Updating $id for development branch..."
             BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
             for file in schemas/*.json; do
-              sed -i -E 's|"\$id": "https?://[^/]+/schemas/([^"]+)"|"$id": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
-              sed -i -E 's|"\$ref": "https?://[^/]+/schemas/([^"]+)"|"$ref": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$id": "https?://.+/schemas/([^"]+)"|"$id": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https?://.+/schemas/([^"]+)"|"$ref": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
             done
           fi
           # 変更があったかどうかをチェックし、結果を出力変数にセット
