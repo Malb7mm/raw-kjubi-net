@@ -1,4 +1,4 @@
-# https://g.co/gemini/share/b036ebcfa81f
+# https://g.co/gemini/share/556929e0bc61
 name: Deploy JSON Schemas
 
 on:
@@ -10,6 +10,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # このジョブがリポジトリに書き込む（コミット＆プッシュする）権限を付与します
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,22 +23,47 @@ jobs:
           node-version: '20'
 
       - name: Update $id in JSON Schemas
+        id: update_schemas
         run: |
           # mainブランチの場合の処理
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "Updating $id for main branch..."
             for file in schemas/*.json; do
-              # sedコマンドで$idの値を置換します
-              sed -i -E 's|"\$id": "https://raw.kjubi.net/schemas/([^"]+)"|"$id": "https://raw.kjubi.net/schemas/\1"|g' "$file"
-              sed -i -E 's|"\$ref": "https://raw.kjubi.net/schemas/([^"]+)"|"$ref": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$id": "https?://[^/]+/schemas/([^"]+)"|"$id": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https?://[^/]+/schemas/([^"]+)"|"$ref": "https://raw.kjubi.net/schemas/\1"|g' "$file"
             done
           # mainブランチ以外の場合の処理
           else
             echo "Updating $id for development branch..."
             BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
             for file in schemas/*.json; do
-              # sedコマンドで$idの値を置-換します
-              sed -i -E 's|"\$id": "https://raw.kjubi.net/schemas/([^"]+)"|"$id": "https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
-              sed -i -E 's|"\$ref": "https://raw.kjubi.net/schemas/([^"]+)"|"$ref": "https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$id": "https?://[^/]+/schemas/([^"]+)"|"$id": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https?://[^/]+/schemas/([^"]+)"|"$ref": "https://raw.githubusercontent.com/${{ github.repository }}/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
             done
           fi
+          # 変更があったかどうかをチェックし、結果を出力変数にセット
+          if [[ -n $(git status -s) ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        # mainブランチ以外、かつ、前のステップで変更があった場合のみ実行
+        if: github.ref != 'refs/heads/main' && steps.update_schemas.outputs.changes == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add schemas/*.json
+          # コミットメッセージに [skip ci] を含めることで、このコミットによるActionsの再実行を防ぎます
+          git commit -m "Automated: Update JSON Schema \$id [skip ci]"
+          git push
+
+      - name: Deploy to Cloudflare Pages
+        if: github.ref == 'refs/heads/main' # mainブランチの場合のみ実行
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'raw-kjubi-net' # Cloudflare Pagesのプロジェクト名
+          directory: './'
