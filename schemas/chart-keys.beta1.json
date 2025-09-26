@@ -46,7 +46,7 @@
                     },
                     "variant": {
                       "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/defs/objVariant"
+                      "$ref": "#/$defs/objVariant"
                     }
                   }
                 },
@@ -81,7 +81,7 @@
                     },
                     "variant": {
                       "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/defs/objVariant"
+                      "$ref": "#/$defs/objVariant"
                     }
                   }
                 },
@@ -99,7 +99,7 @@
                     },
                     "variant": {
                       "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/defs/objVariant"
+                      "$ref": "#/$defs/objVariant"
                     }
                   }
                 }
