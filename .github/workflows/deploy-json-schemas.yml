@@ -1,11 +1,7 @@
 # https://g.co/gemini/share/4ad8b1886293
 name: Deploy JSON Schemas
 
-on:
-  push:
-    branches:
-      - main
-      - '*' # mainブランチ以外のすべてのブランチも対象
+on: push
 
 jobs:
   deploy:
