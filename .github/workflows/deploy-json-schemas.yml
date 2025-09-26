@@ -1,0 +1,41 @@
+# https://g.co/gemini/share/b036ebcfa81f
+name: Deploy JSON Schemas
+
+on:
+  push:
+    branches:
+      - main
+      - '*' # mainブランチ以外のすべてのブランチも対象
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Update $id in JSON Schemas
+        run: |
+          # mainブランチの場合の処理
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "Updating $id for main branch..."
+            for file in schemas/*.json; do
+              # sedコマンドで$idの値を置換します
+              sed -i -E 's|"\$id": "https://raw.kjubi.net/schemas/([^"]+)"|"$id": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https://raw.kjubi.net/schemas/([^"]+)"|"$ref": "https://raw.kjubi.net/schemas/\1"|g' "$file"
+            done
+          # mainブランチ以外の場合の処理
+          else
+            echo "Updating $id for development branch..."
+            BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
+            for file in schemas/*.json; do
+              # sedコマンドで$idの値を置-換します
+              sed -i -E 's|"\$id": "https://raw.kjubi.net/schemas/([^"]+)"|"$id": "https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+              sed -i -E 's|"\$ref": "https://raw.kjubi.net/schemas/([^"]+)"|"$ref": "https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/'"$BRANCH_NAME"'/schemas/\1"|g' "$file"
+            done
+          fi
