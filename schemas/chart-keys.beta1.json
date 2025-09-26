@@ -28,6 +28,18 @@
             "objects": {
               "items": {
                 "type": "object",
+                "properties": {
+                  "eventtags": {
+                    "description": "オブジェクトに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "variant": {
+                    "description": "オブジェクトのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
+                    "$ref": "#/$defs/objVariant"
+                  }
+                },
+
                 "oneOf": [
                   {
                     "required": ["type", "timing", "lane"],
@@ -43,15 +55,6 @@
                       "lane": { 
                         "description": "ノーツの降ってくるレーン",
                         "type": "number" 
-                      },
-                      "eventtags": {
-                        "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                        "type": "array",
-                        "items": { "type": "string" }
-                      },
-                      "variant": {
-                        "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                        "$ref": "#/$defs/objVariant"
                       }
                     }
                   },
@@ -79,15 +82,6 @@
                       "lane": { 
                         "description": "ノーツの降ってくるレーン",
                         "type": "number" 
-                      },
-                      "eventtags": {
-                        "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                        "type": "array",
-                        "items": { "type": "string" }
-                      },
-                      "variant": {
-                        "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                        "$ref": "#/$defs/objVariant"
                       }
                     }
                   },
@@ -98,15 +92,6 @@
                       "type": {
                         "description": "オブジェクトの種類 [barline: 小節線を表します]",
                         "const": "barline" 
-                      },
-                      "eventtags": {
-                        "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                        "type": "array",
-                        "items": { "type": "string" }
-                      },
-                      "variant": {
-                        "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                        "$ref": "#/$defs/objVariant"
                       }
                     }
                   }
