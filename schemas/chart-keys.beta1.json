@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/chart-keys.beta1.json",
+  "$id": "https://raw.kjubi.net/schemas/chart-keys.beta1.json",
   "title": "Chart (Keys)",
   "description": "A chart file of Keys mode for kjubi-engine",
 
   "allOf": [
     {
-      "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/chart.beta1.json"
+      "$ref": "https://raw.kjubi.net/schemas/chart.beta1.json"
     },
 
     {
@@ -50,7 +50,7 @@
                       },
                       "timing": {
                         "description": "ノーツの降ってくるタイミング",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "lane": { 
                         "description": "ノーツの降ってくるレーン",
@@ -68,16 +68,16 @@
                       },
                       "timing": {
                         "description": "ロングノーツの始点が降ってくるタイミング",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "endTiming": {
                         "description": "ロングノーツの終点が降ってくるタイミング",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "midTimings": {
                         "description": "ロングノーツの中継点が降ってくるタイミング。操作上はあってもなくても変わりません。スキンによっては見た目に影響したり、中継点のタイミングで効果音が鳴ることがあります。中継点のタイミングでコンボ数の増加および追加判定が行われます",
                         "type": "array",
-                        "items": { "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" }
+                        "items": { "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" }
                       },
                       "lane": { 
                         "description": "ノーツの降ってくるレーン",
@@ -119,11 +119,11 @@
                       },
                       "timing": {
                         "description": "イベントの開始タイミング",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "endTiming": {
                         "description": "イベントの終了タイミング。省略した場合は'timing'と同じ値として扱われます",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "from": {
                         "description": "開始タイミングでの基準スクロール速度の値。fromのみ指定した場合、timing以降のノーツ全てをfromの値に設定します",
@@ -145,7 +145,7 @@
                       },
                       "timing": {
                         "description": "イベントのタイミング",
-                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                        "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
                       },
                       "value": {
                         "description": "スクロール速度の値",
