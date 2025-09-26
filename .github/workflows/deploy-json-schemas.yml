@@ -42,8 +42,10 @@ jobs:
           fi
           # 変更があったかどうかをチェックし、結果を出力変数にセット
           if [[ -n $(git status -s) ]]; then
+            echo "changes=true"
             echo "changes=true" >> $GITHUB_OUTPUT
           else
+            echo "changes=false"
             echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
