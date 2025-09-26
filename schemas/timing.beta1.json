@@ -1,6 +1,6 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.kjubi.net/schemas/timing.beta1.json",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json",
   "title": "Timing",
   "description": "Timing representer for Kjubi chart data",
   "type": "object",

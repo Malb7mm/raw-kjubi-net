@@ -1,13 +1,14 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.kjubi.net/schemas/chart-keys.beta1.json",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/chart-keys.beta1.json",
   "title": "Chart (Keys)",
   "description": "A chart file of Keys mode for kjubi-engine",
 
   "allOf": [
     {
-      "$ref": "https://raw.kjubi.net/schemas/chart.beta1.json"
+      "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/chart.beta1.json"
     },
+
     {
       "properties": {
         "extendedVersion": {
@@ -15,146 +16,145 @@
         },
       
         "content": {
-          "laneNumber": {
-            "description": "レーンの数（Keys）",
-            "type": "integer",
-            "minimum": 1
-          },
+          "required": ["laneNumber"],
 
-          "objects": {
-            "items": {
-              "type": "object",
-              "oneOf": [
-                {
-                  "properties": {
-                    "type": {
-                      "description": "オブジェクトの種類 [single: 単音のノーツを表します]",
-                      "const": "single" 
-                    },
-                    "timing": {
-                      "description": "ノーツの降ってくるタイミング",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "lane": { 
-                      "description": "ノーツの降ってくるレーン",
-                      "type": "number" 
-                    },
-                    "eventtags": {
-                      "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                      "type": "array",
-                      "items": { "type": "string" }
-                    },
-                    "variant": {
-                      "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/$defs/objVariant"
-                    }
+          "properties": {
+            "laneNumber": {
+              "description": "レーンの数（Keys）",
+              "type": "integer",
+              "minimum": 1
+            },
+
+            "objects": {
+              "items": {
+                "type": "object",
+                "properties": {
+                  "eventTags": {
+                    "description": "オブジェクトに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "variant": {
+                    "description": "オブジェクトのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
+                    "$ref": "#/$defs/objVariant"
                   }
                 },
 
-                {
-                  "properties": {
-                    "type": {
-                      "description": "オブジェクトの種類 [long: ロング（長押し）ノーツを表します]",
-                      "const": "long" 
-                    },
-                    "timing": {
-                      "description": "ロングノーツの始点が降ってくるタイミング",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "endTiming": {
-                      "description": "ロングノーツの終点が降ってくるタイミング",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "midTimings": {
-                      "description": "ロングノーツの中継点が降ってくるタイミング。操作上はあってもなくても変わりません。スキンによっては見た目に影響したり、中継点のタイミングで効果音が鳴ることがあります。中継点のタイミングでコンボ数の増加および追加判定が行われます",
-                      "type": "array",
-                      "items": { "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" }
-                    },
-                    "lane": { 
-                      "description": "ノーツの降ってくるレーン",
-                      "type": "number" 
-                    },
-                    "eventtags": {
-                      "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                      "type": "array",
-                      "items": { "type": "string" }
-                    },
-                    "variant": {
-                      "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/$defs/objVariant"
+                "oneOf": [
+                  {
+                    "required": ["type", "timing", "lane"],
+                    "properties": {
+                      "type": {
+                        "description": "オブジェクトの種類 [single: 単音のノーツを表します]",
+                        "const": "single" 
+                      },
+                      "timing": {
+                        "description": "ノーツの降ってくるタイミング",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "lane": { 
+                        "description": "ノーツの降ってくるレーン",
+                        "type": "number" 
+                      }
                     }
+                  },
+
+                  {
+                    "required": ["type", "timing", "endTiming", "lane"],
+                    "properties": {
+                      "type": {
+                        "description": "オブジェクトの種類 [long: ロング（長押し）ノーツを表します]",
+                        "const": "long" 
+                      },
+                      "timing": {
+                        "description": "ロングノーツの始点が降ってくるタイミング",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "endTiming": {
+                        "description": "ロングノーツの終点が降ってくるタイミング",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "midTimings": {
+                        "description": "ロングノーツの中継点が降ってくるタイミング。操作上はあってもなくても変わりません。スキンによっては見た目に影響したり、中継点のタイミングで効果音が鳴ることがあります。中継点のタイミングでコンボ数の増加および追加判定が行われます",
+                        "type": "array",
+                        "items": { "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" }
+                      },
+                      "lane": { 
+                        "description": "ノーツの降ってくるレーン",
+                        "type": "number" 
+                      }
+                    }
+                  },
+
+                  {
+                    "required": ["type"],
+                    "properties": {
+                      "type": {
+                        "description": "オブジェクトの種類 [barline: 小節線を表します]",
+                        "const": "barline" 
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+
+            "events": {
+              "items": {
+                "type": "object",
+                "required": ["tag"],
+                "properties": {
+                  "tag": {
+                    "description": "イベントタグ。このイベントをオブジェクトに適用させる際には、同じタグ名をeventTagsプロパティのリスト内に含めなければなりません"
                   }
                 },
 
-                {
-                  "properties": {
-                    "type": {
-                      "description": "オブジェクトの種類 [barline: 小節線を表します]",
-                      "const": "barline" 
-                    },
-                    "eventtags": {
-                      "description": "ノーツに付与するイベントタグ。スクロール速度変化などのイベントについて、どのタグが付けられたイベントに影響されるかを指定します",
-                      "type": "array",
-                      "items": { "type": "string" }
-                    },
-                    "variant": {
-                      "description": "ノーツのバリアント情報。variantsで定義したプリセットを指定するか、オブジェクト内でバリアント定義を行ってください",
-                      "$ref": "#/$defs/objVariant"
+                "oneOf": [
+                  {
+                    "required": ["type", "timing", "from"],
+                    "properties": {
+                      "type": {
+                        "description": "イベントの種類 [hs: 範囲内のノーツの基準スクロール速度を変更します]",
+                        "const": "hs" 
+                      },
+                      "timing": {
+                        "description": "イベントの開始タイミング",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "endTiming": {
+                        "description": "イベントの終了タイミング。省略した場合は'timing'と同じ値として扱われます",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "from": {
+                        "description": "開始タイミングでの基準スクロール速度の値。fromのみ指定した場合、timing以降のノーツ全てをfromの値に設定します",
+                        "type": "number"
+                      },
+                      "to": {
+                        "description": "終了タイミングでの基準スクロール速度の値",
+                        "type": "number"
+                      }
                     }
-                  }
-                }
-              ]
-            }
-          },
+                  },
 
-          "events": {
-            "items": {
-              "type": "object",
-              "oneOf": [
-                {
-                  "required": ["type", "timing", "from"],
-                  "properties": {
-                    "type": {
-                      "description": "イベントの種類 [hs: 範囲内のノーツの基準スクロール速度を変更します]",
-                      "const": "hs" 
-                    },
-                    "timing": {
-                      "description": "イベントの開始タイミング",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "endTiming": {
-                      "description": "イベントの終了タイミング。省略した場合は'timing'と同じ値として扱われます",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "from": {
-                      "description": "開始タイミングでの基準スクロール速度の値。fromのみ指定した場合、timing以降のノーツ全てをfromの値に設定します",
-                      "type": "number"
-                    },
-                    "to": {
-                      "description": "終了タイミングでの基準スクロール速度の値",
-                      "type": "number"
+                  {
+                    "required": ["type", "timing", "value"],
+                    "properties": {
+                      "type": {
+                        "description": "イベントの種類 [scroll: ノーツの変速イベントを定義します]",
+                        "const": "scroll" 
+                      },
+                      "timing": {
+                        "description": "イベントのタイミング",
+                        "$ref": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/feat/beta1/schemas/timing.beta1.json" 
+                      },
+                      "value": {
+                        "description": "スクロール速度の値",
+                        "type": "number"
+                      }
                     }
                   }
-                },
-
-                {
-                  "required": ["type", "timing", "value"],
-                  "properties": {
-                    "type": {
-                      "description": "イベントの種類 [scroll: ノーツの変速イベントを定義します]",
-                      "const": "scroll" 
-                    },
-                    "timing": {
-                      "description": "イベントのタイミング",
-                      "$ref": "https://raw.kjubi.net/schemas/timing.beta1.json" 
-                    },
-                    "value": {
-                      "description": "スクロール速度の値",
-                      "type": "number"
-                    }
-                  }
-                }
-              ]
+                ]
+              }
             }
           }
         }
