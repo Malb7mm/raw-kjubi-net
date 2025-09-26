@@ -48,8 +48,8 @@ jobs:
           fi
 
       - name: Commit and push changes
-        # mainブランチ以外、かつ、前のステップで変更があった場合のみ実行
-        if: github.ref != 'refs/heads/main' && steps.update_schemas.outputs.changes == 'true'
+        # 前のステップで変更があった場合のみ実行
+        if: steps.update_schemas.outputs.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
