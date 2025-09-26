@@ -16,13 +16,15 @@
         },
       
         "content": {
+          "required": ["laneNumber"],
+
           "properties": {
             "laneNumber": {
               "description": "レーンの数（Keys）",
               "type": "integer",
               "minimum": 1
             },
-          
+
             "objects": {
               "items": {
                 "type": "object",
@@ -53,7 +55,7 @@
                       }
                     }
                   },
-                
+
                   {
                     "required": ["type", "timing", "endTiming", "lane"],
                     "properties": {
@@ -89,7 +91,7 @@
                       }
                     }
                   },
-                
+
                   {
                     "required": ["type"],
                     "properties": {
@@ -111,7 +113,7 @@
                 ]
               }
             },
-          
+
             "events": {
               "items": {
                 "type": "object",
@@ -141,7 +143,7 @@
                       }
                     }
                   },
-                
+
                   {
                     "required": ["type", "timing", "value"],
                     "properties": {
