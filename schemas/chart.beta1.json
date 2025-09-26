@@ -26,9 +26,9 @@
       "properties": {
         "variants": {
           "description": "オブジェクトのバリアント定義のリスト。スキンによっては、オブジェクトに追加の情報を持たせることで、各オブジェクトの見た目のカスタマイズ等が可能な場合があります。ここでは、バリアントの名前付きプリセットを定義します",
-          "type": "array",
+          "type": "object",
 
-          "items": {
+          "additionalProperties": {
             "type": "object"
           }
         },
