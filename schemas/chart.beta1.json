@@ -58,11 +58,11 @@
 
           "properties": {
             "default": {
-              "$ref": "#/defs/tempolist"
+              "$ref": "#/$defs/tempolist"
             }
           },
           "additionalProperties": {
-            "$ref": "#/defs/tempolist"
+            "$ref": "#/$defs/tempolist"
           }
         }
       }
