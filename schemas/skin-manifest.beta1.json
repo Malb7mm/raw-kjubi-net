@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.kjubi.net/schemas/chart.beta1.json",
+  "title": "Skin Manifest",
+  "description": "A manifest file for Kjubi skin",
+  "type": "object",
+  "required": ["schemaVersion", "name", "author", "version"],
+
+  "properties": {
+    "schemaVersion": {
+      "const": "skin@beta1"
+    },
+
+    "name": {
+      "description": "スキンの名称",
+      "type": "string"
+    },
+
+    "author": {
+      "description": "スキンの作成者名義",
+      "type": "string"
+    },
+
+    "version": {
+      "description": "スキンのバージョン",
+      "type": "string"
+    }
+  }
+}
