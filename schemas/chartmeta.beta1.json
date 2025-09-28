@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.kjubi.net/schemas/chartmeta.beta1.json",
+  "$id": "https://raw.githubusercontent.com/Malb7mm/raw-kjubi-net/working-beta1/schemas/chartmeta.beta1.json",
   "title": "Chart Metadata",
   "description": "Metadata of Kjubi chart",
   "type": "object",
